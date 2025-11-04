@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ip_tracking',
     'ipinfo',
+    'django_ratelimit',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,11 @@ IPINFO_SETTINGS = {
         'ttl': 86400,  
         'maxsize': 1024, 
     },
+}
+
+RATELIMIT_KEY_GETTER = 'ipware.get_key'
+
+RATELIMIT_GROUP_DEFAULTS = {
+    'anonymous': '5/m',  
+    'user': '10/m',      
 }
