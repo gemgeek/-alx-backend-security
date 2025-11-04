@@ -13,3 +13,14 @@ class RequestLog(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} at {self.timestamp} on {self.path}"
+    
+class BlockedIP(models.Model):
+    """
+    Model to store IP addresses that are blocked from accessing the site.
+    """
+    ip_address = models.GenericIPAddressField(unique=True)
+    
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.ip_address} (blocked on {self.timestamp.date()})"    
