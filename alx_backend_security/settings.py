@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ip_tracking',
+    'ipinfo',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'ipinfo.middleware.IPInfoMiddleware',
     'ip_tracking.middleware.IPLoggingMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,3 +124,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+IPINFO_TOKEN = '6824c773791441' 
+
+# Cache settings
+IPINFO_SETTINGS = {
+    'cache_options': {
+        'ttl': 86400,  
+        'maxsize': 1024, 
+    },
+}

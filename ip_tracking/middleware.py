@@ -15,9 +15,18 @@ class IPLoggingMiddleware:
         if BlockedIP.objects.filter(ip_address=ip).exists():
             return HttpResponseForbidden("Your IP address has been blocked.")
 
+        city = None
+        country = None
+        
+        if hasattr(request, 'ipinfo'):
+            city = request.ipinfo.city
+            country = request.ipinfo.country_name
+
         RequestLog.objects.create(
             ip_address=ip,
-            path=request.path
+            path=request.path,
+            country=country,  
+            city=city         
         )
 
         response = self.get_response(request)
